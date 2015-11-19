@@ -70,7 +70,7 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
     // Variables to Import face image
     //-------------------------------------------
     
-    ImageIcon icon = new ImageIcon("images/qua_face_scaled.png");
+    ImageIcon icon = new ImageIcon("images/ankit_face_scaled.png");
     Image unscaledImage = icon.getImage();
     Image scaledImage = unscaledImage.getScaledInstance(ballDiameter, ballDiameter, Image.SCALE_SMOOTH);
     
