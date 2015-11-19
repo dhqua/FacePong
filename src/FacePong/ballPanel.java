@@ -7,7 +7,8 @@ import java.awt.event.*;
 
 public class ballPanel extends JPanel implements ActionListener, KeyListener
 {
-    //Game states 
+    //Game states will determine what screen
+    // the game is currently on
     // ------------------------
     
     boolean onHomeScreen = true;
@@ -16,6 +17,8 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
     boolean endScreen = false;
     
     //Paddle controls
+    // Varaibles for keyboard listener for left
+    // an right paddle
     //-------------------------------------
     
     private boolean upPressed = false;
@@ -25,18 +28,25 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
     private boolean sPressed = false;
     
     // Paddle color flicker variable
+    // Variable inside of switch statement
+    // that gives paddles the rainbow effect
     //------------------------------------
     
-    private int paddleColor = 1; // use inside of switch to make paddles change colors
+    private int paddleColor = 1;
+    
     // Player one stats
+    // Positioning height and width of
+    // Player one paddle
     //-----------------------------
     private int playerOneX = 25;
     private int playerOneY = 250;
     private int playerOneWidth = 20;
     private int playerOneHeight = 60;
     
-    //Player two stats
-    //------------------------------------
+    // Player two stats
+    // Positioning height and width of
+    // Player one paddle
+    //-----------------------------
     
     private int playerTwoX = 955;
     private int playerTwoY = 250;
@@ -44,11 +54,13 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
     private int playerTwoHeight = 60;
     
     // Paddle Speed
+    //------------------------
     private int paddleSpeed = 5;
     
    
     
     //Ball Stats
+    // ball positioning, diameter, and speed
     //-----------------------------
     private int ballDiameter = 60;
 
@@ -63,24 +75,38 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
     int playerOneScore = 0;
     int playerTwoScore = 0;
    
-    // Variable for ball color to use in switch statement
-    //-----------------------------------------
-    int colorChange = 0;
     
     // Variables to Import face image
     //-------------------------------------------
     
+    // Imports unscaled image
     ImageIcon icon = new ImageIcon("images/ankit_face_scaled.png");
     Image unscaledImage = icon.getImage();
+    
+    // Scales image to be same size as ball diameter
+    //----------------------------------------------
+    
     Image scaledImage = unscaledImage.getScaledInstance(ballDiameter, ballDiameter, Image.SCALE_SMOOTH);
+    
     
     
     public ballPanel( )
         {
             setBackground(Color.BLACK);
             
+            // Add key listener and makes the panel
+            // focusable so that it actually 
+            // picks up keys 
+            //-----------------------------------
             setFocusable(true);
             addKeyListener(this);
+            
+            // Adds timer to panel which will call the 
+            // move ball function and animate the game
+            // the *this keyword makes the ballPanel it's
+            // own action listener in order to call the 
+            // moveBall() function
+            // ------------------------------------------
             Timer timer = new Timer(1000/45, this);
             timer.start();
         }
@@ -88,17 +114,25 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
    @Override
     public void actionPerformed(ActionEvent e) 
     {
+        // if on the homescreen do not animate
+        // -------------------------------------
         if(onHomeScreen)
         {
             
         }
+        
         if(curPlaying)
         {
+        // Animates the game, see function definition below
+        //------------------------------------------------
         moveBall();
         }
     }
 
     
+    // ANY CHANGES MADE HERE WILL DIRECTLY AFFECT
+    // GAME ANIMATION!
+    //----------------------------------------------
     
     public void moveBall() 
     {
@@ -204,20 +238,11 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
                         xSpeed = -8;
                     }
                 }
-                
-                
-                if(colorChange <= 5)
-                {
-                    colorChange++; // Changes color of ball everytime it is hit
-                }
-                else
-                {
-                    colorChange = 0; // Starts over cycling through colors
-                }
-                
-                }
-            
+            }
     }
+                
+             
+    
     
     // Player Two
     
@@ -260,15 +285,6 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
                     }
                 }
                 
-                
-              if(colorChange <= 5)
-                {
-                    colorChange++; // Changes color of ball everytime it is hit
-                }
-                else
-                {
-                    colorChange = 0; // Starts over cycling through colors
-                }
                 
           
          }
@@ -421,6 +437,7 @@ public class ballPanel extends JPanel implements ActionListener, KeyListener
         }
         
         // Override keyListener functions
+        
         
          public void keyTyped(KeyEvent e) {}
 
